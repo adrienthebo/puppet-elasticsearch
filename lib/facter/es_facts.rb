@@ -1,5 +1,4 @@
 require 'net/http'
-require 'json'
 require 'yaml'
 
 module EsFacts
@@ -96,4 +95,9 @@ module EsFacts
 
 end
 
-EsFacts.run
+begin
+  require 'json'
+  EsFacts.run
+rescue LoadError
+  $stderr.puts "Couldn't load json, skipping es facts"
+end
